@@ -1,4 +1,3 @@
-
 import os
 import json
 import requests
@@ -31,3 +30,5 @@ if __name__ == "__main__":
     while True:
         analisar_jogos_ao_vivo()
         time.sleep(60)
+
+ 
