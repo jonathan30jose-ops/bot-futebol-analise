@@ -1,13 +1,16 @@
+
 import os
+import json
 import requests
 import time
-from firebase_admin import messaging, credentials, initialize_app
+from firebase_admin import credentials, initialize_app
 
-# Configuração Firebase
-cred = credentials.Certificate("firebase_key.json")
+# Carrega a configuração do Firebase da variável de ambiente que configuramos no Render
+firebase_config = json.loads(os.environ.get("FIREBASE_CONFIG_JSON"))
+cred = credentials.Certificate(firebase_config)
 initialize_app(cred)
 
-# Lê a chave do Render de forma segura
+# Lê a API_KEY da variável de ambiente
 API_KEY = os.environ.get("API_KEY")
 HEADERS = {'x-rapidapi-key': API_KEY, 'x-rapidapi-host': 'v3.football.api-sports.io'}
 
@@ -19,14 +22,12 @@ def analisar_jogos_ao_vivo():
        
         for jogo in jogos:
             status = jogo['fixture']['status']['elapsed']
-            # Continue a lógica do seu código aqui...
             print(f"Jogo encontrado, tempo: {status}")
            
     except Exception as e:
         print(f"Erro ao buscar jogos: {e}")
 
-# Exemplo de loop para rodar o robô
 if __name__ == "__main__":
     while True:
         analisar_jogos_ao_vivo()
-        time.sleep(60) # Espera 60 segundos antes da próxima verificação
+        time.sleep(60)
