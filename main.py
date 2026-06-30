@@ -9,7 +9,7 @@ initialize_app(cred)
 # IMPORTANTE: Substitua o texto abaixo pela sua chave real da API-Football
 API_KEY = "API-Football"
 HEADERS = {'x-rapidapi-key': API_KEY, 'x-rapidapi-host': 'v3.football.api-sports.io'}
-
+ 
 def analisar_jogos_ao_vivo():
     url = "https://v3.football.api-sports.io/fixtures?live=all"
     try:
